@@ -11,7 +11,7 @@ task :update_feed => :environment do
   }
 
   url  = "https://www.drk7.jp/weather/xml/44.xml"
-  xml  = open( url ).read.toutf8
+  xml  = URI.open( url ).read.toutf8
   doc = REXML::Document.new(xml)
   xpath = 'weatherforecast/pref/area[2]/info/rainfallchance/'
 

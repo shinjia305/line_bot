@@ -18,7 +18,7 @@ class LinebotsController < ApplicationController
         when Line::Bot::Event::MessageType::Text
           input = event.message['text']
           url  = "https://www.drk7.jp/weather/xml/44.xml"
-          xml  = open( url ).read.toutf8
+          xml  = URI.open( url ).read.toutf8
           doc = REXML::Document.new(xml)
           xpath = 'weatherforecast/pref/area[2]/'
           min_per = 30
@@ -35,9 +35,9 @@ class LinebotsController < ApplicationController
                 "明日は晴れそうです。"
             end
           when /.*(明後日|あさって).*/
-            per06to12 = doc.elements[xpath + 'info[3]/rainfallchance/period[2]l'].text
-            per12to18 = doc.elements[xpath + 'info[3]/rainfallchance/period[3]l'].text
-            per18to24 = doc.elements[xpath + 'info[3]/rainfallchance/period[4]l'].text
+            per06to12 = doc.elements[xpath + 'info[3]/rainfallchance/period[2]'].text
+            per12to18 = doc.elements[xpath + 'info[3]/rainfallchance/period[3]'].text
+            per18to24 = doc.elements[xpath + 'info[3]/rainfallchance/period[4]'].text
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
               push =
                 "明後日は雨が降るかもしれません。"
@@ -46,9 +46,9 @@ class LinebotsController < ApplicationController
                 "明後日は晴れそうです。"
             end
           else
-            per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]l'].text
-            per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]l'].text
-            per18to24 = doc.elements[xpath + 'info/rainfallchance/period[4]l'].text
+            per06to12 = doc.elements[xpath + 'info/rainfallchance/period[2]'].text
+            per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]'].text
+            per18to24 = doc.elements[xpath + 'info/rainfallchance/period[4]'].text
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
               push = "今日は雨が降りそうです。\n　  6〜12時　#{per06to12}％\n　12〜18時　 #{per12to18}％\n　18〜24時　#{per18to24}％"
             else
