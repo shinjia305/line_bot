@@ -29,10 +29,10 @@ class LinebotsController < ApplicationController
             per18to24 = doc.elements[xpath + 'info[2]/rainfallchance/period[4]'].text
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
               push =
-                "明日は雨が降るかもしれません。\n　  06:00~12:00　#{per06to12}％\n　12:00〜18:00　 #{per12to18}％\n　18:00〜24:00　#{per18to24}％"
+                "明日は雨が降るかもしれません。\n06:00~12:00　#{per06to12}％\n12:00〜18:00　#{per12to18}％\n18:00〜24:00　#{per18to24}％"
             else
               push =
-                "明日は晴れそうです。\n　  06:00~12:00　#{per06to12}％\n　12:00〜18:00　 #{per12to18}％\n　18:00〜24:00　#{per18to24}％"
+                "明日は晴れそうです。\n06:00~12:00　#{per06to12}％\n12:00〜18:00　#{per12to18}％\n18:00〜24:00　#{per18to24}％"
             end
           when /.*(明後日|あさって).*/
             per06to12 = doc.elements[xpath + 'info[3]/rainfallchance/period[2]'].text
@@ -50,9 +50,9 @@ class LinebotsController < ApplicationController
             per12to18 = doc.elements[xpath + 'info/rainfallchance/period[3]'].text
             per18to24 = doc.elements[xpath + 'info/rainfallchance/period[4]'].text
             if per06to12.to_i >= min_per || per12to18.to_i >= min_per || per18to24.to_i >= min_per
-              push = "今日の降水確率は次の通りです。\n　  06:00~12:00　#{per06to12}％\n　12:00〜18:00　 #{per12to18}％\n　18:00〜24:00　#{per18to24}％"
+              push = "今日の降水確率は次の通りです。\n06:00~12:00　#{per06to12}％\n12:00〜18:00　#{per12to18}％\n18:00〜24:00　#{per18to24}％"
             else
-              push = "今日は晴れそうです。\n　  06:00~12:00　#{per06to12}％\n　12:00〜18:00　 #{per12to18}％\n　18:00〜24:00　#{per18to24}％"
+              push = "今日は晴れそうです。\n06:00~12:00　#{per06to12}％\n12:00〜18:00　#{per12to18}％\n18:00〜24:00　#{per18to24}％"
             end
           end
         else

@@ -72,7 +72,7 @@ task :update_feed_of_tomorrow_info => :environment do
       word3 = "明日は雨が降るかもしれません。折りたたみ傘を持って行ってください。"
     end
 
-    push = "#{word1}\n#{word3}\n降水確率は以下の通りです。\n　  06:00~12:00　#{per06to12}％\n　12:00〜18:00　 #{per12to18}％\n　18:00〜24:00　#{per18to24}％\n#{word2}"
+    push = "#{word1}\n#{word3}\n降水確率は以下の通りです。\n06:00~12:00　#{per06to12}％\n12:00〜18:00　#{per12to18}％\n18:00〜24:00　#{per18to24}％\n#{word2}"
     user_ids = User.all.pluck(:line_id)
     message = {
       type: 'text',
