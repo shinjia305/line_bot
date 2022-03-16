@@ -28,9 +28,11 @@ task :update_feed => :environment do
     word = "今日は雲が多く、雨が降るかもしれません。折り畳み傘を持っていってください。"
   when maximum_chance_of_rain_of_today > '70' then
     word = "今日は雨が降るので、傘を持って行ってください"
+  else
+    word = "今日は晴れています。傘の必要はありません。"
   end
 
-  push = "今日の天気:\n#{weather_detail}\n降水確率:\n06:00~12:00　#{from06to12}％\n12:00〜18:00　#{from12to18}％\n18:00〜24:00　#{from18to24}％\n#{word}"
+  push = "今日の天気:\n#{weather_detail}\n\n降水確率:\n06:00~12:00　#{from06to12}％\n12:00〜18:00　#{from12to18}％\n18:00〜24:00　#{from18to24}％\n\n#{word}"
   user_ids = User.all.pluck(:line_id)
   message = {
     type: 'text',
